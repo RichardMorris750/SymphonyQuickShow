@@ -1,0 +1,59 @@
+import System
+import System.Collections.Generic
+import System.Text
+
+
+namespace DataLibrary
+
+	public static class SystemConfig
+	
+		;;; <summary>
+		;;; check to ensure that the Symphony example database is installed
+		;;; </summary>  
+		public static method CheckSampleDatabase, boolean
+			endparams
+		proc
+			data response	,boolean	,true	;;default all is good
+			mErrorInfo.Clear()
+
+			;;check to ensure that the Symphony example database is installed
+			data logValue	,a255
+			data logLength	,i4
+			getlog("SYMPHONYDATA", logValue, logLength)
+			if (!logLength)
+			begin
+				response = false
+				mErrorInfo.Add("*********************************************************")
+				mErrorInfo.Add("*                                                       *")
+				mErrorInfo.Add("* Symphony sample data is required to run this program  *")
+				mErrorInfo.Add("*                                                       *")
+				mErrorInfo.Add("* Please visit www.symphonyframework.net to download    *")
+				mErrorInfo.Add("* and install the sample database.  Click on the        *")
+				mErrorInfo.Add("* download tab to downlaod the installer.               *")
+				mErrorInfo.Add("*                                                       *")
+				mErrorInfo.Add("*********************************************************")
+			end
+			
+			mreturn response
+
+		endmethod
+
+		private static mErrorInfo	,@List<string>	,new List<string>()
+
+		public static method WriteErrorToConsole, void
+			endparams
+		proc
+			data item	,string
+
+			foreach item in mErrorInfo
+			begin
+				Console.WriteLine(item)
+			end
+			Console.WriteLine("Press a key to continue.")
+			Console.ReadKey()
+
+		endmethod
+			
+	endclass
+
+endnamespace

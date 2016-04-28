@@ -1,0 +1,84 @@
+import System
+import System.Collections.Generic
+import System.Text
+
+import DataLibrary
+import DataLibrary.Model
+import DataLibrary.DataIO
+import Symphony.Conductor.DataIO
+
+namespace ExampleFileIO
+
+    ;;; <summary>
+    ;;; The main entry point for the application.
+    ;;; </summary>
+    main
+
+    proc
+
+		;;make sure thread procesing is configured
+		Symphony.Conductor.Static.ThreadSafe.AnchorToUIThread()
+
+		;;check the database is configured
+		if (DataLibrary.SystemConfig.CheckSampleDatabase() == false)
+		begin
+			DataLibrary.SystemConfig.WriteErrorToConsole()
+			stop
+		end
+
+		;;define out file handler
+		data partIO	,@Part_FileIO	,new Part_FileIO(FileOpenMode.UpdateIndexed)
+
+		;;read and display the first 5 records
+		data item	,@Part_Data	,new Part_Data()
+		data num	,int
+		data status	,FileAccessResults
+
+		status = partIO.ReadFirstRecord(item)
+		while (status == FileAccessResults.Success && num < 5)
+		begin
+			incr num
+			Console.WriteLine("Read part record # " + %string(num) + ", Id = " + item.Id + ", Dexcription = " + item.Description)
+			
+			;;read the net record
+			status = partIO.ReadNextRecord(item)
+		end
+
+		Console.WriteLine("Done.  Press a key to continue")
+		Console.ReadKey()
+
+
+		Console.WriteLine("")
+		Console.WriteLine("Read by partial key (the default)")
+		;;read by partial key (the default)
+		item.Id = "C"
+		if (partIO.ReadRecord(item) == FileAccessResults.Success) then
+			Console.WriteLine("found part record using key 'C': Id = " + item.Id + ", Dexcription = " + item.Description)
+		else
+			Console.WriteLine("No records matching Id='C', error number returned was = " + %string(partIO.LastSynergyError))
+
+		item.Id = "XYZ"
+		if (partIO.ReadRecord(item) == FileAccessResults.Success) then
+			Console.WriteLine("found part record using key 'XYZ': Id = " + item.Id + ", Dexcription = " + item.Description)
+		else
+			Console.WriteLine("No records matching Id='XYZ', error number returned was = " + %string(partIO.LastSynergyError))
+			
+		Console.WriteLine("Done.  Press a key to continue")
+		Console.ReadKey()
+		
+		Console.WriteLine("")
+		Console.WriteLine("Read by full key (partIO.ForceFullKeyRead = true)")
+		;;Read by full key.
+		item.Id = "C"
+		partIO.ForceFullKeyRead = true
+		if (partIO.ReadRecord(item) == FileAccessResults.Success) then
+			Console.WriteLine("found part record using key 'C': Id = " + item.Id + ", Dexcription = " + item.Description)
+		else
+			Console.WriteLine("No records matching Id='C', error number returned was = " + %string(partIO.LastSynergyError))
+			
+		Console.WriteLine("Done.  Press a key to continue")
+		Console.ReadKey()
+		
+	endmain
+
+endnamespace
