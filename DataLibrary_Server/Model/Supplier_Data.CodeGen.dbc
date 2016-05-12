@@ -28,38 +28,38 @@ namespace DataLibrary.Model
 
     ;;define a structure that we can use around the applicaiton
 
-	structure STRPart
-		.include 'part' repository  , norecord, prefix = "str_"
+	structure STRSupplier
+		.include 'supplier' repository  , norecord, prefix = "str_"
 	endstructure
 
 	{JsonObject(MemberSerialization.OptIn)}
-    public partial class Part_Data extends Symphony.Conductor.Model.DataObjectBase
+    public partial class Supplier_Data extends Symphony.Conductor.Model.DataObjectBase
 
-		private cls structure clsstrPart
+		private cls structure clsstrSupplier
 .align
-			public csId, String
+			public csSupplier_id, String
 .align
-			public csGroupid, String
+			public csName, String
 .align
-			public csSupplierid, String
+			public csAddress_1, String
 .align
-			public csDescription, String
+			public csAddress_2, String
 .align
-			public csTechnical_info, String
+			public csAddress_3, String
 .align
-			public csQuantity, Int32
+			public csCity, String
 .align
-			public csCost_price, Decimal
+			public csPostal_code, String
 .align
-			public csSpare, String
+			public csWeb_address, String
 		endstructure
 		
 		public static SynergyMemberInfo, @List<System.Reflection.MemberInfo>
 
-		public const RPSStructureName	,String	,"PART"
-		public const RPSStructureSize	,Int32	,700
+		public const RPSStructureName	,String	,"SUPPLIER"
+		public const RPSStructureSize	,Int32	,400
 
-		private part_main	,STRPart
+		private supplier_main	,STRSupplier
 
 		private mDoneSynergyRecordValue	,boolean
 		
@@ -71,10 +71,10 @@ namespace DataLibrary.Model
 		private mIntegerConveter  ,@SynergyIntConverter ,new SynergyIntConverter()
 		private mAlphaYNConveter	,@SynergyAlphaYNConverter, new SynergyAlphaYNConverter()
 
-		static method Part_Data
+		static method Supplier_Data
 			endparams
 		proc
-			data objectType = ^typeof(Part_Data)
+			data objectType = ^typeof(Supplier_Data)
 			SynergyMemberInfo = new List<System.Reflection.MemberInfo>() {
 			&	^as(RuntimeReflectionExtensions.GetRuntimeProperty(objectType, "SerializableSynergyRecord"), @System.Reflection.MemberInfo)
 			& }
@@ -87,70 +87,70 @@ namespace DataLibrary.Model
 
 			
 			
-			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "ID", "Id",  "", "",
-			&	"", "ID", 1, 20,
+			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "SUPPLIER_ID", "Supplier_id",  "", "",
+			&	"", "SUPPLIER_ID", 1, 20,
 			&	0, 0, 0, 0,
 			&	"ALPHA", true, 0, 0)
 
 			
-			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "GROUPID", "Groupid",  "Change_Group_Id", "",
-			&	"", "GROUPID", 21, 20,
+			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "NAME", "Name",  "", "",
+			&	"", "NAME", 21, 50,
 			&	0, 0, 0, 0,
 			&	"ALPHA", true, 0, 0)
 
 			
-			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "SUPPLIERID", "Supplierid",  "Change_Supplier_Id", "",
-			&	"", "SUPPLIERID", 41, 20,
+			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "ADDRESS_1", "Address_1",  "", "",
+			&	"", "ADDRESS_1", 71, 50,
 			&	0, 0, 0, 0,
 			&	"ALPHA", true, 0, 0)
 
 			
-			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "DESCRIPTION", "Description",  "", "",
-			&	"", "DESCRIPTION", 61, 50,
-			&	0, 0, 0, 0,
-			&	"ALPHA", true, 0, 0)
-
-			
-			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "TECHNICAL_INFO", "Technical_info",  "", "",
-			&	"", "TECHNICAL_INFO", 111, 500,
+			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "ADDRESS_2", "Address_2",  "", "",
+			&	"", "ADDRESS_2", 121, 50,
 			&	0, 0, 0, 0,
 			&	"ALPHA", false, 0, 0)
 
 			
-			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "QUANTITY", "Quantity",  "", "",
-			&	"", "QUANTITY", 611, 4,
+			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "ADDRESS_3", "Address_3",  "", "",
+			&	"", "ADDRESS_3", 171, 50,
 			&	0, 0, 0, 0,
-			&	"INTEGER", false, 0, 2147483647)
+			&	"ALPHA", false, 0, 0)
 
 			
-			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "COST_PRICE", "Cost_price",  "", "",
-			&	"", "COST_PRICE", 615, 10,
+			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "CITY", "City",  "", "",
+			&	"", "CITY", 221, 30,
 			&	0, 0, 0, 0,
-			&	"IMPLIED", false, 0, 99999999.99)
+			&	"ALPHA", true, 0, 0)
 
 			
-			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "SPARE", "Spare",  "", "",
-			&	"", "SPARE", 625, 76,
+			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "POSTAL_CODE", "Postal_code",  "", "",
+			&	"", "POSTAL_CODE", 251, 10,
+			&	0, 0, 0, 0,
+			&	"ALPHA", true, 0, 0)
+
+			
+			staticSetFieldInfo(mStaticFieldList, mStaticFieldDictionary, "WEB_ADDRESS", "Web_address",  "", "",
+			&	"", "WEB_ADDRESS", 261, 78,
 			&	0, 0, 0, 0,
 			&	"ALPHA", false, 0, 0)
 
 
-			mStaticFieldNameList.Add("Id")
-			mStaticFieldHeadingList.Add("Part ID")
-			mStaticFieldNameList.Add("Groupid")
-			mStaticFieldHeadingList.Add("Group ID")
-			mStaticFieldNameList.Add("Supplierid")
+			mStaticFieldNameList.Add("Supplier_id")
 			mStaticFieldHeadingList.Add("Supplier ID")
-			mStaticFieldNameList.Add("Description")
-			mStaticFieldHeadingList.Add("Description")
-			mStaticFieldNameList.Add("Technical_info")
-			mStaticFieldHeadingList.Add("Technical Description")
-			mStaticFieldNameList.Add("Quantity")
-			mStaticFieldHeadingList.Add("Quantity")
-			mStaticFieldNameList.Add("Cost_price")
-			mStaticFieldHeadingList.Add("Cost price")
-			mStaticFieldNameList.Add("Spare")
-			mStaticFieldHeadingList.Add("SPARE")
+			mStaticFieldNameList.Add("Name")
+			mStaticFieldHeadingList.Add("Name")
+			mStaticFieldNameList.Add("Address_1")
+			mStaticFieldHeadingList.Add("Address")
+			mStaticFieldNameList.Add("Address_2")
+			mStaticFieldHeadingList.Add("ADDRESS_2")
+			mStaticFieldNameList.Add("Address_3")
+			mStaticFieldHeadingList.Add("ADDRESS_3")
+			mStaticFieldNameList.Add("City")
+			mStaticFieldHeadingList.Add("City")
+			mStaticFieldNameList.Add("Postal_code")
+			mStaticFieldHeadingList.Add("Postal/Zip code")
+			mStaticFieldNameList.Add("Web_address")
+			mStaticFieldHeadingList.Add("Web site")
 
 			mreturn
 		endmethod
@@ -161,7 +161,7 @@ namespace DataLibrary.Model
         ;;; <summary>
         ;;;  Constructor, initialise the base fields
         ;;; </summary>
-        public method Part_Data
+        public method Supplier_Data
             endparams
             parent()
         proc
@@ -179,7 +179,7 @@ namespace DataLibrary.Model
         ;;; Alternate constructor, accepts the inital value to assign to the object
         ;;; </summary>
         ;;; <param name="synRec">Provide the data to load into the _DATAOBJECT_</param>
-        public method Part_Data
+        public method Supplier_Data
             in req synRec       ,String
             endparams
             parent()
@@ -190,7 +190,7 @@ namespace DataLibrary.Model
 			mIsNew = false
 			configureFieldInfo()
 			setFieldNames()
-			part_main = synRec
+			supplier_main = synRec
 			;OriginalSynergyRecord = synRec
 			extendedConstructor()
         endmethod
@@ -199,8 +199,8 @@ namespace DataLibrary.Model
 		;;; Alternate constructor, accepts the inital value to assign to the object
 		;;; </summary>
 		;;; <param name="synRec">Provide the data to load into the _DATAOBJECT_</param>
-		public method Part_Data
-			in req synRec       ,STRPart
+		public method Supplier_Data
+			in req synRec       ,STRSupplier
 			endparams
 			parent()
 		proc
@@ -210,7 +210,7 @@ namespace DataLibrary.Model
 			mIsNew = false
 			configureFieldInfo()
 			setFieldNames()
-			part_main = synRec
+			supplier_main = synRec
 			;OriginalSynergyRecord = synRec
 			extendedConstructor()
 		endmethod
@@ -221,7 +221,7 @@ namespace DataLibrary.Model
 		;;; </summary>
 		;;; <param name="synRec">Provide the data to load into the _DATAOBJECT_</param>
 		;;; <param name="notifyUI">values passed onto the ObjectRaisesPropertyChanged property.</param>
-		public method Part_Data
+		public method Supplier_Data
 			in req synRec       ,String
 			in req notifyUI		,DataObjectNotificationState
 			endparams
@@ -234,7 +234,7 @@ namespace DataLibrary.Model
 			mIsNew = false
 			configureFieldInfo()
 			setFieldNames()
-			part_main = synRec
+			supplier_main = synRec
 			;OriginalSynergyRecord = synRec
 			extendedConstructor()
 		endmethod
@@ -245,8 +245,8 @@ namespace DataLibrary.Model
 		;;; </summary>
 		;;; <param name="synRec">Provide the data to load into the _DATAOBJECT_</param>
 		;;; <param name="notifyUI">values passed onto the ObjectRaisesPropertyChanged property.</param>
-		public method Part_Data
-			in req synRec       ,STRPart
+		public method Supplier_Data
+			in req synRec       ,STRSupplier
 			in req notifyUI		,DataObjectNotificationState
 			endparams
 			parent()
@@ -258,7 +258,7 @@ namespace DataLibrary.Model
 			mIsNew = false
 			configureFieldInfo()
 			setFieldNames()
-			part_main = synRec
+			supplier_main = synRec
 ;			OriginalSynergyRecord = synRec
 			extendedConstructor()
 		endmethod
@@ -290,139 +290,139 @@ namespace DataLibrary.Model
 
         ;;Expose fields as properties for data binding
         
-        ;;Id
+        ;;Supplier_id
 		{JsonProperty}
-		public property Id, a20
+		public property Supplier_id, a20
 			method get
 			proc
-				mreturn %atrim(part_main.STR_Id)
+				mreturn %atrim(supplier_main.STR_Supplier_id)
             endmethod
 			method set
 			proc
-					if (part_main.STR_Id .nes. value)
+					if (supplier_main.STR_Supplier_id .nes. value)
 				begin
-										part_main.STR_Id = value
+										supplier_main.STR_Supplier_id = value
 					ValidateEnteredData(1)
-					RaisePropertyChanged("Id")
+					RaisePropertyChanged("Supplier_id")
 				end
 			endmethod
 		endproperty
-        ;;Groupid
+        ;;Name
 		{JsonProperty}
-		public property Groupid, a20
+		public property Name, a50
 			method get
 			proc
-				mreturn %atrim(part_main.STR_Groupid)
+				mreturn %atrim(supplier_main.STR_Name)
             endmethod
 			method set
 			proc
-					if (part_main.STR_Groupid .nes. value)
+					if (supplier_main.STR_Name .nes. value)
 				begin
-										part_main.STR_Groupid = value
+										supplier_main.STR_Name = value
 					ValidateEnteredData(2)
-					RaisePropertyChanged("Groupid")
+					RaisePropertyChanged("Name")
 				end
 			endmethod
 		endproperty
-        ;;Supplierid
+        ;;Address_1
 		{JsonProperty}
-		public property Supplierid, a20
+		public property Address_1, a50
 			method get
 			proc
-				mreturn %atrim(part_main.STR_Supplierid)
+				mreturn %atrim(supplier_main.STR_Address_1)
             endmethod
 			method set
 			proc
-					if (part_main.STR_Supplierid .nes. value)
+					if (supplier_main.STR_Address_1 .nes. value)
 				begin
-										part_main.STR_Supplierid = value
+										supplier_main.STR_Address_1 = value
 					ValidateEnteredData(3)
-					RaisePropertyChanged("Supplierid")
+					RaisePropertyChanged("Address_1")
 				end
 			endmethod
 		endproperty
-        ;;Description
+        ;;Address_2
 		{JsonProperty}
-		public property Description, a50
+		public property Address_2, a50
 			method get
 			proc
-				mreturn %atrim(part_main.STR_Description)
+				mreturn %atrim(supplier_main.STR_Address_2)
             endmethod
 			method set
 			proc
-					if (part_main.STR_Description .nes. value)
+					if (supplier_main.STR_Address_2 .nes. value)
 				begin
-										part_main.STR_Description = value
+										supplier_main.STR_Address_2 = value
 					ValidateEnteredData(4)
-					RaisePropertyChanged("Description")
+					RaisePropertyChanged("Address_2")
 				end
 			endmethod
 		endproperty
-        ;;Technical_info
+        ;;Address_3
 		{JsonProperty}
-		public property Technical_info, a500
+		public property Address_3, a50
 			method get
 			proc
-				mreturn %atrim(part_main.STR_Technical_info)
+				mreturn %atrim(supplier_main.STR_Address_3)
             endmethod
 			method set
 			proc
-					if (part_main.STR_Technical_info .nes. value)
+					if (supplier_main.STR_Address_3 .nes. value)
 				begin
-										part_main.STR_Technical_info = value
+										supplier_main.STR_Address_3 = value
 					ValidateEnteredData(5)
-					RaisePropertyChanged("Technical_info")
+					RaisePropertyChanged("Address_3")
 				end
 			endmethod
 		endproperty
-        ;;Quantity
+        ;;City
 		{JsonProperty}
-		public property Quantity, i4
+		public property City, a30
 			method get
 			proc
-                mreturn part_main.STR_Quantity
+				mreturn %atrim(supplier_main.STR_City)
             endmethod
 			method set
 			proc
-				if (part_main.STR_Quantity .ne. value)
+					if (supplier_main.STR_City .nes. value)
 				begin
-										part_main.STR_Quantity = value
+										supplier_main.STR_City = value
 					ValidateEnteredData(6)
-					RaisePropertyChanged("Quantity")
+					RaisePropertyChanged("City")
 				end
 			endmethod
 		endproperty
-        ;;Cost_price
+        ;;Postal_code
 		{JsonProperty}
-		public property Cost_price, d10.2
+		public property Postal_code, a10
 			method get
 			proc
-                mreturn part_main.STR_Cost_price
+				mreturn %atrim(supplier_main.STR_Postal_code)
             endmethod
 			method set
 			proc
-				if (part_main.STR_Cost_price .ne. value)
+					if (supplier_main.STR_Postal_code .nes. value)
 				begin
-										part_main.STR_Cost_price = value
+										supplier_main.STR_Postal_code = value
 					ValidateEnteredData(7)
-					RaisePropertyChanged("Cost_price")
+					RaisePropertyChanged("Postal_code")
 				end
 			endmethod
 		endproperty
-        ;;Spare
+        ;;Web_address
 		{JsonProperty}
-		public property Spare, a76
+		public property Web_address, a78
 			method get
 			proc
-				mreturn %atrim(part_main.STR_Spare)
+				mreturn %atrim(supplier_main.STR_Web_address)
             endmethod
 			method set
 			proc
-					if (part_main.STR_Spare .nes. value)
+					if (supplier_main.STR_Web_address .nes. value)
 				begin
-										part_main.STR_Spare = value
+										supplier_main.STR_Web_address = value
 					ValidateEnteredData(8)
-					RaisePropertyChanged("Spare")
+					RaisePropertyChanged("Web_address")
 				end
 			endmethod
 		endproperty
@@ -433,7 +433,7 @@ namespace DataLibrary.Model
 		public override property SynergyRecord, String
             method get
             proc
-                mreturn (String)Part_main
+                mreturn (String)Supplier_main
             endmethod
             method set
             proc
@@ -443,25 +443,25 @@ namespace DataLibrary.Model
 				mDoneSynergyRecordValue = true
 				
 				setUsed()
-                Part_main = value
+                Supplier_main = value
 
                 ;;Signal that all fields have changed
                 
-				SetFieldValid("Id")
+				SetFieldValid("Supplier_id")
 									if (mValidateSynergyData) ValidateEnteredData(1)
-				SetFieldValid("Groupid")
+				SetFieldValid("Name")
 									if (mValidateSynergyData) ValidateEnteredData(2)
-				SetFieldValid("Supplierid")
+				SetFieldValid("Address_1")
 									if (mValidateSynergyData) ValidateEnteredData(3)
-				SetFieldValid("Description")
+				SetFieldValid("Address_2")
 									if (mValidateSynergyData) ValidateEnteredData(4)
-				SetFieldValid("Technical_info")
+				SetFieldValid("Address_3")
 									if (mValidateSynergyData) ValidateEnteredData(5)
-				SetFieldValid("Quantity")
+				SetFieldValid("City")
 									if (mValidateSynergyData) ValidateEnteredData(6)
-				SetFieldValid("Cost_price")
+				SetFieldValid("Postal_code")
 									if (mValidateSynergyData) ValidateEnteredData(7)
-				SetFieldValid("Spare")
+				SetFieldValid("Web_address")
 									if (mValidateSynergyData) ValidateEnteredData(8)
 				RaisePropertyChanged(^null)
 				RaiseSynergyRecordChanged()
@@ -473,7 +473,7 @@ namespace DataLibrary.Model
         ;;; </summary>
         public override method InitData ,void
         proc
-			init Part_main
+			init Supplier_main
 
 			RaisePropertyChanged(^null)
 			parent.InitData()
@@ -487,21 +487,21 @@ namespace DataLibrary.Model
         proc
 			
 				            ValidateEnteredData(1)
-            RaisePropertyChanged("Id")
+            RaisePropertyChanged("Supplier_id")
 				            ValidateEnteredData(2)
-            RaisePropertyChanged("Groupid")
+            RaisePropertyChanged("Name")
 				            ValidateEnteredData(3)
-            RaisePropertyChanged("Supplierid")
+            RaisePropertyChanged("Address_1")
 				            ValidateEnteredData(4)
-            RaisePropertyChanged("Description")
+            RaisePropertyChanged("Address_2")
 				            ValidateEnteredData(5)
-            RaisePropertyChanged("Technical_info")
+            RaisePropertyChanged("Address_3")
 				            ValidateEnteredData(6)
-            RaisePropertyChanged("Quantity")
+            RaisePropertyChanged("City")
 				            ValidateEnteredData(7)
-            RaisePropertyChanged("Cost_price")
+            RaisePropertyChanged("Postal_code")
 				            ValidateEnteredData(8)
-            RaisePropertyChanged("Spare")
+            RaisePropertyChanged("Web_address")
 
         endmethod
 
@@ -517,21 +517,21 @@ namespace DataLibrary.Model
             using fieldName select
 			
 			
-            ("ID"), mCurrentField = 1
+            ("SUPPLIER_ID"), mCurrentField = 1
 			
-            ("GROUPID"), mCurrentField = 2
+            ("NAME"), mCurrentField = 2
 			
-            ("SUPPLIERID"), mCurrentField = 3
+            ("ADDRESS_1"), mCurrentField = 3
 			
-            ("DESCRIPTION"), mCurrentField = 4
+            ("ADDRESS_2"), mCurrentField = 4
 			
-            ("TECHNICAL_INFO"), mCurrentField = 5
+            ("ADDRESS_3"), mCurrentField = 5
 			
-            ("QUANTITY"), mCurrentField = 6
+            ("CITY"), mCurrentField = 6
 			
-            ("COST_PRICE"), mCurrentField = 7
+            ("POSTAL_CODE"), mCurrentField = 7
 			
-            ("SPARE"), mCurrentField = 8
+            ("WEB_ADDRESS"), mCurrentField = 8
             (),
                 mCurrentField = 0
             endusing
@@ -572,7 +572,7 @@ namespace DataLibrary.Model
         
 		
 
-        public property IdIsEnabled, Boolean
+        public property Supplier_idIsEnabled, Boolean
             method get
             proc
                 mreturn GetFieldEnabledState(1)
@@ -580,12 +580,12 @@ namespace DataLibrary.Model
             method set
             proc
                 SetFieldEnabledState(1, value)
-                RaiseNonRPSPropertyChanged("IdIsEnabled")
+                RaiseNonRPSPropertyChanged("Supplier_idIsEnabled")
             endmethod
         endproperty
 		
 
-        public property GroupidIsEnabled, Boolean
+        public property NameIsEnabled, Boolean
             method get
             proc
                 mreturn GetFieldEnabledState(2)
@@ -593,12 +593,12 @@ namespace DataLibrary.Model
             method set
             proc
                 SetFieldEnabledState(2, value)
-                RaiseNonRPSPropertyChanged("GroupidIsEnabled")
+                RaiseNonRPSPropertyChanged("NameIsEnabled")
             endmethod
         endproperty
 		
 
-        public property SupplieridIsEnabled, Boolean
+        public property Address_1IsEnabled, Boolean
             method get
             proc
                 mreturn GetFieldEnabledState(3)
@@ -606,12 +606,12 @@ namespace DataLibrary.Model
             method set
             proc
                 SetFieldEnabledState(3, value)
-                RaiseNonRPSPropertyChanged("SupplieridIsEnabled")
+                RaiseNonRPSPropertyChanged("Address_1IsEnabled")
             endmethod
         endproperty
 		
 
-        public property DescriptionIsEnabled, Boolean
+        public property Address_2IsEnabled, Boolean
             method get
             proc
                 mreturn GetFieldEnabledState(4)
@@ -619,12 +619,12 @@ namespace DataLibrary.Model
             method set
             proc
                 SetFieldEnabledState(4, value)
-                RaiseNonRPSPropertyChanged("DescriptionIsEnabled")
+                RaiseNonRPSPropertyChanged("Address_2IsEnabled")
             endmethod
         endproperty
 		
 
-        public property Technical_infoIsEnabled, Boolean
+        public property Address_3IsEnabled, Boolean
             method get
             proc
                 mreturn GetFieldEnabledState(5)
@@ -632,12 +632,12 @@ namespace DataLibrary.Model
             method set
             proc
                 SetFieldEnabledState(5, value)
-                RaiseNonRPSPropertyChanged("Technical_infoIsEnabled")
+                RaiseNonRPSPropertyChanged("Address_3IsEnabled")
             endmethod
         endproperty
 		
 
-        public property QuantityIsEnabled, Boolean
+        public property CityIsEnabled, Boolean
             method get
             proc
                 mreturn GetFieldEnabledState(6)
@@ -645,12 +645,12 @@ namespace DataLibrary.Model
             method set
             proc
                 SetFieldEnabledState(6, value)
-                RaiseNonRPSPropertyChanged("QuantityIsEnabled")
+                RaiseNonRPSPropertyChanged("CityIsEnabled")
             endmethod
         endproperty
 		
 
-        public property Cost_priceIsEnabled, Boolean
+        public property Postal_codeIsEnabled, Boolean
             method get
             proc
                 mreturn GetFieldEnabledState(7)
@@ -658,12 +658,12 @@ namespace DataLibrary.Model
             method set
             proc
                 SetFieldEnabledState(7, value)
-                RaiseNonRPSPropertyChanged("Cost_priceIsEnabled")
+                RaiseNonRPSPropertyChanged("Postal_codeIsEnabled")
             endmethod
         endproperty
 		
 
-        public property SpareIsEnabled, Boolean
+        public property Web_addressIsEnabled, Boolean
             method get
             proc
                 mreturn GetFieldEnabledState(8)
@@ -671,113 +671,113 @@ namespace DataLibrary.Model
             method set
             proc
                 SetFieldEnabledState(8, value)
-                RaiseNonRPSPropertyChanged("SpareIsEnabled")
+                RaiseNonRPSPropertyChanged("Web_addressIsEnabled")
             endmethod
         endproperty
 
         ;;Expose properties to indicate whether fields are focussed
-		private mIdIsFocused	,Boolean
-		public property IdIsFocused, Boolean
+		private mSupplier_idIsFocused	,Boolean
+		public property Supplier_idIsFocused, Boolean
 			method get
 			proc
-				mreturn mIdIsFocused
+				mreturn mSupplier_idIsFocused
 			endmethod
 			method set
 			proc
 				clearFocus()
-				mIdIsFocused = value
-				RaiseNonRPSPropertyChanged("IdIsFocused")
+				mSupplier_idIsFocused = value
+				RaiseNonRPSPropertyChanged("Supplier_idIsFocused")
 			endmethod
 		endproperty
-		private mGroupidIsFocused	,Boolean
-		public property GroupidIsFocused, Boolean
+		private mNameIsFocused	,Boolean
+		public property NameIsFocused, Boolean
 			method get
 			proc
-				mreturn mGroupidIsFocused
+				mreturn mNameIsFocused
 			endmethod
 			method set
 			proc
 				clearFocus()
-				mGroupidIsFocused = value
-				RaiseNonRPSPropertyChanged("GroupidIsFocused")
+				mNameIsFocused = value
+				RaiseNonRPSPropertyChanged("NameIsFocused")
 			endmethod
 		endproperty
-		private mSupplieridIsFocused	,Boolean
-		public property SupplieridIsFocused, Boolean
+		private mAddress_1IsFocused	,Boolean
+		public property Address_1IsFocused, Boolean
 			method get
 			proc
-				mreturn mSupplieridIsFocused
+				mreturn mAddress_1IsFocused
 			endmethod
 			method set
 			proc
 				clearFocus()
-				mSupplieridIsFocused = value
-				RaiseNonRPSPropertyChanged("SupplieridIsFocused")
+				mAddress_1IsFocused = value
+				RaiseNonRPSPropertyChanged("Address_1IsFocused")
 			endmethod
 		endproperty
-		private mDescriptionIsFocused	,Boolean
-		public property DescriptionIsFocused, Boolean
+		private mAddress_2IsFocused	,Boolean
+		public property Address_2IsFocused, Boolean
 			method get
 			proc
-				mreturn mDescriptionIsFocused
+				mreturn mAddress_2IsFocused
 			endmethod
 			method set
 			proc
 				clearFocus()
-				mDescriptionIsFocused = value
-				RaiseNonRPSPropertyChanged("DescriptionIsFocused")
+				mAddress_2IsFocused = value
+				RaiseNonRPSPropertyChanged("Address_2IsFocused")
 			endmethod
 		endproperty
-		private mTechnical_infoIsFocused	,Boolean
-		public property Technical_infoIsFocused, Boolean
+		private mAddress_3IsFocused	,Boolean
+		public property Address_3IsFocused, Boolean
 			method get
 			proc
-				mreturn mTechnical_infoIsFocused
+				mreturn mAddress_3IsFocused
 			endmethod
 			method set
 			proc
 				clearFocus()
-				mTechnical_infoIsFocused = value
-				RaiseNonRPSPropertyChanged("Technical_infoIsFocused")
+				mAddress_3IsFocused = value
+				RaiseNonRPSPropertyChanged("Address_3IsFocused")
 			endmethod
 		endproperty
-		private mQuantityIsFocused	,Boolean
-		public property QuantityIsFocused, Boolean
+		private mCityIsFocused	,Boolean
+		public property CityIsFocused, Boolean
 			method get
 			proc
-				mreturn mQuantityIsFocused
+				mreturn mCityIsFocused
 			endmethod
 			method set
 			proc
 				clearFocus()
-				mQuantityIsFocused = value
-				RaiseNonRPSPropertyChanged("QuantityIsFocused")
+				mCityIsFocused = value
+				RaiseNonRPSPropertyChanged("CityIsFocused")
 			endmethod
 		endproperty
-		private mCost_priceIsFocused	,Boolean
-		public property Cost_priceIsFocused, Boolean
+		private mPostal_codeIsFocused	,Boolean
+		public property Postal_codeIsFocused, Boolean
 			method get
 			proc
-				mreturn mCost_priceIsFocused
+				mreturn mPostal_codeIsFocused
 			endmethod
 			method set
 			proc
 				clearFocus()
-				mCost_priceIsFocused = value
-				RaiseNonRPSPropertyChanged("Cost_priceIsFocused")
+				mPostal_codeIsFocused = value
+				RaiseNonRPSPropertyChanged("Postal_codeIsFocused")
 			endmethod
 		endproperty
-		private mSpareIsFocused	,Boolean
-		public property SpareIsFocused, Boolean
+		private mWeb_addressIsFocused	,Boolean
+		public property Web_addressIsFocused, Boolean
 			method get
 			proc
-				mreturn mSpareIsFocused
+				mreturn mWeb_addressIsFocused
 			endmethod
 			method set
 			proc
 				clearFocus()
-				mSpareIsFocused = value
-				RaiseNonRPSPropertyChanged("SpareIsFocused")
+				mWeb_addressIsFocused = value
+				RaiseNonRPSPropertyChanged("Web_addressIsFocused")
 			endmethod
 		endproperty
 
@@ -785,7 +785,7 @@ namespace DataLibrary.Model
 		
 		
 
-		public property IdIsReadOnly, Boolean
+		public property Supplier_idIsReadOnly, Boolean
 			method get
 			proc
 				mreturn GetFieldReadOnlyState(1)
@@ -793,12 +793,12 @@ namespace DataLibrary.Model
 			method set
 			proc
 				SetFieldReadOnlyState(1, value)
-				RaiseNonRPSPropertyChanged("IdIsReadOnly")
+				RaiseNonRPSPropertyChanged("Supplier_idIsReadOnly")
 			endmethod
 		endproperty
 		
 
-		public property GroupidIsReadOnly, Boolean
+		public property NameIsReadOnly, Boolean
 			method get
 			proc
 				mreturn GetFieldReadOnlyState(2)
@@ -806,12 +806,12 @@ namespace DataLibrary.Model
 			method set
 			proc
 				SetFieldReadOnlyState(2, value)
-				RaiseNonRPSPropertyChanged("GroupidIsReadOnly")
+				RaiseNonRPSPropertyChanged("NameIsReadOnly")
 			endmethod
 		endproperty
 		
 
-		public property SupplieridIsReadOnly, Boolean
+		public property Address_1IsReadOnly, Boolean
 			method get
 			proc
 				mreturn GetFieldReadOnlyState(3)
@@ -819,12 +819,12 @@ namespace DataLibrary.Model
 			method set
 			proc
 				SetFieldReadOnlyState(3, value)
-				RaiseNonRPSPropertyChanged("SupplieridIsReadOnly")
+				RaiseNonRPSPropertyChanged("Address_1IsReadOnly")
 			endmethod
 		endproperty
 		
 
-		public property DescriptionIsReadOnly, Boolean
+		public property Address_2IsReadOnly, Boolean
 			method get
 			proc
 				mreturn GetFieldReadOnlyState(4)
@@ -832,12 +832,12 @@ namespace DataLibrary.Model
 			method set
 			proc
 				SetFieldReadOnlyState(4, value)
-				RaiseNonRPSPropertyChanged("DescriptionIsReadOnly")
+				RaiseNonRPSPropertyChanged("Address_2IsReadOnly")
 			endmethod
 		endproperty
 		
 
-		public property Technical_infoIsReadOnly, Boolean
+		public property Address_3IsReadOnly, Boolean
 			method get
 			proc
 				mreturn GetFieldReadOnlyState(5)
@@ -845,12 +845,12 @@ namespace DataLibrary.Model
 			method set
 			proc
 				SetFieldReadOnlyState(5, value)
-				RaiseNonRPSPropertyChanged("Technical_infoIsReadOnly")
+				RaiseNonRPSPropertyChanged("Address_3IsReadOnly")
 			endmethod
 		endproperty
 		
 
-		public property QuantityIsReadOnly, Boolean
+		public property CityIsReadOnly, Boolean
 			method get
 			proc
 				mreturn GetFieldReadOnlyState(6)
@@ -858,12 +858,12 @@ namespace DataLibrary.Model
 			method set
 			proc
 				SetFieldReadOnlyState(6, value)
-				RaiseNonRPSPropertyChanged("QuantityIsReadOnly")
+				RaiseNonRPSPropertyChanged("CityIsReadOnly")
 			endmethod
 		endproperty
 		
 
-		public property Cost_priceIsReadOnly, Boolean
+		public property Postal_codeIsReadOnly, Boolean
 			method get
 			proc
 				mreturn GetFieldReadOnlyState(7)
@@ -871,12 +871,12 @@ namespace DataLibrary.Model
 			method set
 			proc
 				SetFieldReadOnlyState(7, value)
-				RaiseNonRPSPropertyChanged("Cost_priceIsReadOnly")
+				RaiseNonRPSPropertyChanged("Postal_codeIsReadOnly")
 			endmethod
 		endproperty
 		
 
-		public property SpareIsReadOnly, Boolean
+		public property Web_addressIsReadOnly, Boolean
 			method get
 			proc
 				mreturn GetFieldReadOnlyState(8)
@@ -884,7 +884,7 @@ namespace DataLibrary.Model
 			method set
 			proc
 				SetFieldReadOnlyState(8, value)
-				RaiseNonRPSPropertyChanged("SpareIsReadOnly")
+				RaiseNonRPSPropertyChanged("Web_addressIsReadOnly")
 			endmethod
 		endproperty
 
@@ -896,14 +896,14 @@ namespace DataLibrary.Model
 			if (!doingClearFocus)
 			begin
 				doingClearFocus = true
-				if (IdIsFocused) IdIsFocused = false
-				if (GroupidIsFocused) GroupidIsFocused = false
-				if (SupplieridIsFocused) SupplieridIsFocused = false
-				if (DescriptionIsFocused) DescriptionIsFocused = false
-				if (Technical_infoIsFocused) Technical_infoIsFocused = false
-				if (QuantityIsFocused) QuantityIsFocused = false
-				if (Cost_priceIsFocused) Cost_priceIsFocused = false
-				if (SpareIsFocused) SpareIsFocused = false
+				if (Supplier_idIsFocused) Supplier_idIsFocused = false
+				if (NameIsFocused) NameIsFocused = false
+				if (Address_1IsFocused) Address_1IsFocused = false
+				if (Address_2IsFocused) Address_2IsFocused = false
+				if (Address_3IsFocused) Address_3IsFocused = false
+				if (CityIsFocused) CityIsFocused = false
+				if (Postal_codeIsFocused) Postal_codeIsFocused = false
+				if (Web_addressIsFocused) Web_addressIsFocused = false
 				doingClearFocus = false
 			end
 		endmethod
@@ -937,13 +937,13 @@ namespace DataLibrary.Model
 			endrecord
 		proc
 			using colName select
-			("Id"),
+			("Supplier_id"),
 			begin
-				if (((Part_Data)obj1).Id == ((Part_Data)obj2).Id) then
+				if (((Supplier_Data)obj1).Supplier_id == ((Supplier_Data)obj2).Supplier_id) then
 					result = 0
 				else
 				begin
-					if (((Part_Data)obj1).Id > ((Part_Data)obj2).Id) then
+					if (((Supplier_Data)obj1).Supplier_id > ((Supplier_Data)obj2).Supplier_id) then
 					begin
 						if (sortDir == Symphony.Conductor.Framework.SynergySortOrder.Ascending) then
 							result = -1
@@ -959,13 +959,13 @@ namespace DataLibrary.Model
 					end
 				end
 			end
-			("Groupid"),
+			("Name"),
 			begin
-				if (((Part_Data)obj1).Groupid == ((Part_Data)obj2).Groupid) then
+				if (((Supplier_Data)obj1).Name == ((Supplier_Data)obj2).Name) then
 					result = 0
 				else
 				begin
-					if (((Part_Data)obj1).Groupid > ((Part_Data)obj2).Groupid) then
+					if (((Supplier_Data)obj1).Name > ((Supplier_Data)obj2).Name) then
 					begin
 						if (sortDir == Symphony.Conductor.Framework.SynergySortOrder.Ascending) then
 							result = -1
@@ -981,13 +981,13 @@ namespace DataLibrary.Model
 					end
 				end
 			end
-			("Supplierid"),
+			("Address_1"),
 			begin
-				if (((Part_Data)obj1).Supplierid == ((Part_Data)obj2).Supplierid) then
+				if (((Supplier_Data)obj1).Address_1 == ((Supplier_Data)obj2).Address_1) then
 					result = 0
 				else
 				begin
-					if (((Part_Data)obj1).Supplierid > ((Part_Data)obj2).Supplierid) then
+					if (((Supplier_Data)obj1).Address_1 > ((Supplier_Data)obj2).Address_1) then
 					begin
 						if (sortDir == Symphony.Conductor.Framework.SynergySortOrder.Ascending) then
 							result = -1
@@ -1003,13 +1003,13 @@ namespace DataLibrary.Model
 					end
 				end
 			end
-			("Description"),
+			("Address_2"),
 			begin
-				if (((Part_Data)obj1).Description == ((Part_Data)obj2).Description) then
+				if (((Supplier_Data)obj1).Address_2 == ((Supplier_Data)obj2).Address_2) then
 					result = 0
 				else
 				begin
-					if (((Part_Data)obj1).Description > ((Part_Data)obj2).Description) then
+					if (((Supplier_Data)obj1).Address_2 > ((Supplier_Data)obj2).Address_2) then
 					begin
 						if (sortDir == Symphony.Conductor.Framework.SynergySortOrder.Ascending) then
 							result = -1
@@ -1025,13 +1025,13 @@ namespace DataLibrary.Model
 					end
 				end
 			end
-			("Technical_info"),
+			("Address_3"),
 			begin
-				if (((Part_Data)obj1).Technical_info == ((Part_Data)obj2).Technical_info) then
+				if (((Supplier_Data)obj1).Address_3 == ((Supplier_Data)obj2).Address_3) then
 					result = 0
 				else
 				begin
-					if (((Part_Data)obj1).Technical_info > ((Part_Data)obj2).Technical_info) then
+					if (((Supplier_Data)obj1).Address_3 > ((Supplier_Data)obj2).Address_3) then
 					begin
 						if (sortDir == Symphony.Conductor.Framework.SynergySortOrder.Ascending) then
 							result = -1
@@ -1047,13 +1047,13 @@ namespace DataLibrary.Model
 					end
 				end
 			end
-			("Quantity"),
+			("City"),
 			begin
-				if (((Part_Data)obj1).Quantity == ((Part_Data)obj2).Quantity) then
+				if (((Supplier_Data)obj1).City == ((Supplier_Data)obj2).City) then
 					result = 0
 				else
 				begin
-					if (((Part_Data)obj1).Quantity > ((Part_Data)obj2).Quantity) then
+					if (((Supplier_Data)obj1).City > ((Supplier_Data)obj2).City) then
 					begin
 						if (sortDir == Symphony.Conductor.Framework.SynergySortOrder.Ascending) then
 							result = -1
@@ -1069,13 +1069,13 @@ namespace DataLibrary.Model
 					end
 				end
 			end
-			("Cost_price"),
+			("Postal_code"),
 			begin
-				if (((Part_Data)obj1).Cost_price == ((Part_Data)obj2).Cost_price) then
+				if (((Supplier_Data)obj1).Postal_code == ((Supplier_Data)obj2).Postal_code) then
 					result = 0
 				else
 				begin
-					if (((Part_Data)obj1).Cost_price > ((Part_Data)obj2).Cost_price) then
+					if (((Supplier_Data)obj1).Postal_code > ((Supplier_Data)obj2).Postal_code) then
 					begin
 						if (sortDir == Symphony.Conductor.Framework.SynergySortOrder.Ascending) then
 							result = -1
@@ -1091,13 +1091,13 @@ namespace DataLibrary.Model
 					end
 				end
 			end
-			("Spare"),
+			("Web_address"),
 			begin
-				if (((Part_Data)obj1).Spare == ((Part_Data)obj2).Spare) then
+				if (((Supplier_Data)obj1).Web_address == ((Supplier_Data)obj2).Web_address) then
 					result = 0
 				else
 				begin
-					if (((Part_Data)obj1).Spare > ((Part_Data)obj2).Spare) then
+					if (((Supplier_Data)obj1).Web_address > ((Supplier_Data)obj2).Web_address) then
 					begin
 						if (sortDir == Symphony.Conductor.Framework.SynergySortOrder.Ascending) then
 							result = -1
@@ -1127,70 +1127,68 @@ namespace DataLibrary.Model
 		public property SerializableSynergyRecord, [#]byte
 			method get
 			proc
-				data tmpSTR	,clsstrPart
-				tmpSTR.csId = (string)mAlphaConveter.Convert(part_main.STR_id, ^null, ^null, ^null)
-				tmpSTR.csGroupid = (string)mAlphaConveter.Convert(part_main.STR_groupid, ^null, ^null, ^null)
-				tmpSTR.csSupplierid = (string)mAlphaConveter.Convert(part_main.STR_supplierid, ^null, ^null, ^null)
-				tmpSTR.csDescription = (string)mAlphaConveter.Convert(part_main.STR_description, ^null, ^null, ^null)
-				tmpSTR.csTechnical_info = (string)mAlphaConveter.Convert(part_main.STR_technical_info, ^null, ^null, ^null)
-				tmpSTR.csQuantity = (int32)mIntegerConveter.Convert(part_main.STR_quantity, ^null, ^null, ^null)
-				tmpSTR.csCost_price = (decimal)mImpliedDecimalConveter.Convert(part_main.STR_cost_price, ^null, ^null, ^null)
-				tmpSTR.csSpare = (string)mAlphaConveter.Convert(part_main.STR_spare, ^null, ^null, ^null)
+				data tmpSTR	,clsstrSupplier
+				tmpSTR.csSupplier_id = (string)mAlphaConveter.Convert(supplier_main.STR_supplier_id, ^null, ^null, ^null)
+				tmpSTR.csName = (string)mAlphaConveter.Convert(supplier_main.STR_name, ^null, ^null, ^null)
+				tmpSTR.csAddress_1 = (string)mAlphaConveter.Convert(supplier_main.STR_address_1, ^null, ^null, ^null)
+				tmpSTR.csAddress_2 = (string)mAlphaConveter.Convert(supplier_main.STR_address_2, ^null, ^null, ^null)
+				tmpSTR.csAddress_3 = (string)mAlphaConveter.Convert(supplier_main.STR_address_3, ^null, ^null, ^null)
+				tmpSTR.csCity = (string)mAlphaConveter.Convert(supplier_main.STR_city, ^null, ^null, ^null)
+				tmpSTR.csPostal_code = (string)mAlphaConveter.Convert(supplier_main.STR_postal_code, ^null, ^null, ^null)
+				tmpSTR.csWeb_address = (string)mAlphaConveter.Convert(supplier_main.STR_web_address, ^null, ^null, ^null)
 				mreturn structureToByteArray(tmpSTR)
 			endmethod
 			method set
 			proc
-				data tmpSTR	,clsstrPart
+				data tmpSTR	,clsstrSupplier
 				tmpSTR = byteArrayToStructure(value)
-				part_main.STR_Id = (a)mAlphaConveter.ConvertBack(tmpSTR.csId, ^null, ^null, ^null)
-				part_main.STR_Groupid = (a)mAlphaConveter.ConvertBack(tmpSTR.csGroupid, ^null, ^null, ^null)
-				part_main.STR_Supplierid = (a)mAlphaConveter.ConvertBack(tmpSTR.csSupplierid, ^null, ^null, ^null)
-				part_main.STR_Description = (a)mAlphaConveter.ConvertBack(tmpSTR.csDescription, ^null, ^null, ^null)
-				part_main.STR_Technical_info = (a)mAlphaConveter.ConvertBack(tmpSTR.csTechnical_info, ^null, ^null, ^null)
-				part_main.STR_Quantity = (i)mIntegerConveter.ConvertBack(tmpSTR.csQuantity, ^null, ^null, ^null)
-				part_main.STR_Cost_price = (id)mImpliedDecimalConveter.ConvertBack(tmpSTR.csCost_price, ^null, ^null, ^null)
-				part_main.STR_Spare = (a)mAlphaConveter.ConvertBack(tmpSTR.csSpare, ^null, ^null, ^null)
+				supplier_main.STR_Supplier_id = (a)mAlphaConveter.ConvertBack(tmpSTR.csSupplier_id, ^null, ^null, ^null)
+				supplier_main.STR_Name = (a)mAlphaConveter.ConvertBack(tmpSTR.csName, ^null, ^null, ^null)
+				supplier_main.STR_Address_1 = (a)mAlphaConveter.ConvertBack(tmpSTR.csAddress_1, ^null, ^null, ^null)
+				supplier_main.STR_Address_2 = (a)mAlphaConveter.ConvertBack(tmpSTR.csAddress_2, ^null, ^null, ^null)
+				supplier_main.STR_Address_3 = (a)mAlphaConveter.ConvertBack(tmpSTR.csAddress_3, ^null, ^null, ^null)
+				supplier_main.STR_City = (a)mAlphaConveter.ConvertBack(tmpSTR.csCity, ^null, ^null, ^null)
+				supplier_main.STR_Postal_code = (a)mAlphaConveter.ConvertBack(tmpSTR.csPostal_code, ^null, ^null, ^null)
+				supplier_main.STR_Web_address = (a)mAlphaConveter.ConvertBack(tmpSTR.csWeb_address, ^null, ^null, ^null)
 			endmethod
 		endproperty
 			
 		private static method structureToByteArray	,[#]byte
-			tmpSTRUCT				,clsstrPart
+			tmpSTRUCT				,clsstrSupplier
 			endparams
 		proc
 			data stream	,@MemoryStream , new MemoryStream()
 			begin
 				disposable data writer ,@BinaryWriter , new BinaryWriter(stream)
-				writer.Write(tmpSTRUCT.csId)
-				writer.Write(tmpSTRUCT.csGroupid)
-				writer.Write(tmpSTRUCT.csSupplierid)
-				writer.Write(tmpSTRUCT.csDescription)
-				writer.Write(tmpSTRUCT.csTechnical_info)
-				writer.Write(tmpSTRUCT.csQuantity.ToString())
-				writer.Write(tmpSTRUCT.csCost_price.ToString())
-				writer.Write(tmpSTRUCT.csSpare)
+				writer.Write(tmpSTRUCT.csSupplier_id)
+				writer.Write(tmpSTRUCT.csName)
+				writer.Write(tmpSTRUCT.csAddress_1)
+				writer.Write(tmpSTRUCT.csAddress_2)
+				writer.Write(tmpSTRUCT.csAddress_3)
+				writer.Write(tmpSTRUCT.csCity)
+				writer.Write(tmpSTRUCT.csPostal_code)
+				writer.Write(tmpSTRUCT.csWeb_address)
 			end
 			mreturn stream.ToArray()
 		endmethod
 		
-		private static method byteArrayToStructure	,clsstrPart
+		private static method byteArrayToStructure	,clsstrSupplier
 			bytearray, [#]byte  
 			endparams
 		proc
 			data tmpString	,string
-			data tmpSTRUCT	,clsstrPart
+			data tmpSTRUCT	,clsstrSupplier
 			data stream	,@MemoryStream	,new MemoryStream(byteArray)
 			begin
 				disposable data reader	,@BinaryReader	,new BinaryReader(stream)
-				tmpSTRUCT.csId = reader.ReadString()
-				tmpSTRUCT.csGroupid = reader.ReadString()
-				tmpSTRUCT.csSupplierid = reader.ReadString()
-				tmpSTRUCT.csDescription = reader.ReadString()
-				tmpSTRUCT.csTechnical_info = reader.ReadString()
-				tmpString = reader.ReadString()
-				tmpSTRUCT.csQuantity = Convert.ToInt32(tmpString)
-				tmpString = reader.ReadString()
-				tmpSTRUCT.csCost_price = Convert.ToDecimal(tmpString)
-				tmpSTRUCT.csSpare = reader.ReadString()
+				tmpSTRUCT.csSupplier_id = reader.ReadString()
+				tmpSTRUCT.csName = reader.ReadString()
+				tmpSTRUCT.csAddress_1 = reader.ReadString()
+				tmpSTRUCT.csAddress_2 = reader.ReadString()
+				tmpSTRUCT.csAddress_3 = reader.ReadString()
+				tmpSTRUCT.csCity = reader.ReadString()
+				tmpSTRUCT.csPostal_code = reader.ReadString()
+				tmpSTRUCT.csWeb_address = reader.ReadString()
 			end
 
 			mreturn tmpSTRUCT

@@ -27,7 +27,7 @@ namespace ExampleFileIO
 		end
 
 		;;define out file handler
-		data partIO	,@Part_FileIO	,new Part_FileIO(FileOpenMode.UpdateIndexed)
+		data partIO	= new Part_FileIO(FileOpenMode.UpdateIndexed)
 
 		;;read and display the first 5 records
 		data item	,@Part_Data	,new Part_Data()
@@ -76,9 +76,52 @@ namespace ExampleFileIO
 		else
 			Console.WriteLine("No records matching Id='C', error number returned was = " + %string(partIO.LastSynergyError))
 			
-		Console.WriteLine("Done.  Press a key to continue")
+		Console.WriteLine("Press a key to continue.")
 		Console.ReadKey()
+		Console.WriteLine("Displaying orders.")
 		
+		;;display order details
+		Console.Clear()
+
+		;;IO objects
+		data orderHeadIO = new Order_header_FileIO()
+		data supplierIO = new Supplier_FileIO()
+		data orderLineIO = new Order_line_FileIO()
+
+		;;data objects
+		data ordHead = new Order_header_Data()
+		data supp = new Supplier_Data()
+		data ordLine = new Order_line_Data()
+		data part = new Part_Data()
+
+		;;load the first order
+		while (orderHeadIO.ReadNextRecord(ordHead) == FileAccessResults.Success)
+		begin
+			;;load the related supplier
+			supp.Supplier_id = ordHead.Supplierid
+			supplierIO.ReadRecord(supp)
+			Console.WriteLine("Order: " + %string(ordHead.Order_number) + ", from: " + supp.Name)
+
+			;;the order line key is the order number and the line number
+			;;we can force the length of the key read to be the first segment
+			;;which is the order number
+			data tmp ,STROrder_line
+			orderLineIO.ForceKeyLength = ^size(tmp.str_order_number)
+
+			ordLine.Order_number = ordHead.Order_number
+			data lineStatus = orderLineIO.ReadRecord(ordLine)
+			while (lineStatus == FileAccessResults.Success && ordHead.Order_number == ordLine.Order_number)
+			begin
+				;;read the related product record
+				part.Id = ordLine.Part_id
+				partIO.ReadRecord(part)
+				Console.WriteLine("   -> Item: " + %string(ordLine.Line_item) + ", " + ordLine.Part_id + "  " + part.Description + "  Quantity = " + %string(ordLine.Quantity))
+				lineStatus = orderLineIO.ReadNextRecord(ordLine)
+			end
+		end
+		Console.WriteLine("Press a key to continue.")
+		Console.ReadKey()
+
 	endmain
 
 endnamespace
